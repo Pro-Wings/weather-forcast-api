@@ -3,6 +3,7 @@ package com.prowings.config;
 import java.util.Arrays;
 import java.util.List;
 
+import org.dozer.CustomConverter;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,6 +13,8 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
+
+import com.prowings.util.CountryCodeConverter;
 
 @Configuration
 public class CommonConfigs {
@@ -36,14 +39,15 @@ public class CommonConfigs {
 //	}
 
 	@Bean
-//	@Qualifier
-	@Primary
+	@Qualifier
 	public DozerBeanMapper mapper() {
-	    List<String> mappingFiles = Arrays.asList(
-	    	      "dozer_mapping2.xml");
+	    List<String> mappingFiles = Arrays.asList("dozer_mapping2.xml");
+	    
+	    List<CustomConverter> converters = Arrays.asList(new CountryCodeConverter());
 
 	    	    DozerBeanMapper dozerBean = new DozerBeanMapper();
 	    	    dozerBean.setMappingFiles(mappingFiles);
+	    	    dozerBean.setCustomConverters(converters);
 	    	    return dozerBean;
 	}
 }

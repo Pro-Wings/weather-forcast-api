@@ -5,10 +5,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.dozer.CustomConverter;
+import org.springframework.stereotype.Component;
 
 import com.prowings.model.Weather;
 import com.prowings.model.dto.Climate;
 
+@Component
 public class CountryCodeConverter implements CustomConverter {
 	
     public Object convert(Object dest, Object source, Class<?> arg2, Class<?> arg3) {

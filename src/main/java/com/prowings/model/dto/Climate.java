@@ -2,6 +2,11 @@ package com.prowings.model.dto;
 
 import org.dozer.Mapping;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,8 +18,9 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+@JsonInclude(Include.NON_EMPTY)
 public class Climate {
-	//mandatory
+	
 	private String city;
 	//mandatory
 	private String country;
@@ -25,7 +31,7 @@ public class Climate {
 	//mandatory
 	@Mapping("temperatureInCelcius")
 	private double temperatureInFht;
-	//mandatory
+
 	private String weather;
 	//optional
 	private String weatherDesc;
@@ -33,9 +39,9 @@ public class Climate {
 	private double tempFeelsLike;
 	private double tempMin;
 	private double tempMax;
-	//mandatory
 	private double pressure;
 	//mandatory
+	@JsonIgnore
 	private double humidity;
 
 }

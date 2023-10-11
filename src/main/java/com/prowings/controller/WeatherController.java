@@ -8,10 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.prowings.model.Weather;
+import com.prowings.model.dto.Climate;
 import com.prowings.service.WeatherService;
 
+import lombok.extern.log4j.Log4j2;
 import reactor.core.publisher.Mono;
 
+@Log4j2
 @RestController
 @RequestMapping("/v1")
 public class WeatherController {
@@ -26,8 +29,9 @@ public class WeatherController {
 	}
 	
 	@PostMapping("/weathers")
-	public Mono<Weather> predictNewWeather(@RequestBody Weather weather)
+	public Mono<Climate> predictNewWeather(@RequestBody Weather weather)
 	{
+		log.info("Request received to add weather : {} in weather api",weather);
 		return weatherService.createWeather(weather);
 	}
 }

@@ -1,5 +1,7 @@
 package com.prowings.model;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,6 +25,7 @@ public class Weather {
 	private double tempFeelsLike;
 	private double tempMin;
 	private double tempMax;
+	@JsonAlias({"pressure","weather_pressure"})
 	private double pressure;
 	private double humidity;
 

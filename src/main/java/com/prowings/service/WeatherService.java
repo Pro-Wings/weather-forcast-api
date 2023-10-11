@@ -3,13 +3,14 @@ package com.prowings.service;
 import org.springframework.http.ResponseEntity;
 
 import com.prowings.model.Weather;
+import com.prowings.model.dto.Climate;
 
 import reactor.core.publisher.Mono;
 
 public interface WeatherService {
 	
 
-	public Mono<Weather> createWeather(Weather weather); 
+	public Mono<Climate> createWeather(Weather weather); 
 
 	public Weather getWeatherByCity(String city); 
 

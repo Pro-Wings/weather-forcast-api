@@ -98,18 +98,22 @@ public class WeatherServiceImpl implements WeatherService {
 //			      .body(Mono.just(convertToClimate(weather)), Weather.class)
 				.retrieve()
 				.bodyToMono(Climate.class)
-//				.retryWhen(Retry.max(3).filter(t -> t instanceof ConnectException));
-				.retry(3);
-//				.flatMap(foo -> {
-//			        if (foo.getCity() == "pune") {
-//			            return Mono.error(new ConnectException("Retry requested"));
-//			        } else {
-//			            return Mono.just(foo);
-//			        }
-//			    })
-//			    .retryWhen(Retry.fixedDelay(3, Duration.ofSeconds(1))
-//			        .filter(throwable -> throwable instanceof ConnectException));
+				.retryWhen(Retry
+                        .backoff(3, Duration.ofSeconds(2))  // Retry 3 times with a 2-second delay
+                        .maxBackoff(Duration.ofSeconds(10))   // Maximum backoff duration
+                )
+				.onErrorResume(Throwable.class, this::handleRecovery); // Specify the exception type and the recovery function
 		return weatherMono;
 	}
 
+	 private Mono<Climate> handleRecovery(Throwable error) {
+	        // Define your recovery logic here
+	        // You can return a default value, fetch data from a backup source, or perform any other action
+		 log.info("**********inside handleRecovery()***********");
+		 Climate climate = new Climate();
+		 climate.setWeatherDesc("ERRRRRRROOOOORRRRRR");
+		 
+	        return Mono.just(climate);
+	    }
+	
 }

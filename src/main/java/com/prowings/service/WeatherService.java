@@ -12,6 +12,8 @@ public interface WeatherService {
 
 	public Mono<Climate> createWeather(Weather weather); 
 
-	public Weather getWeatherByCity(String city); 
+	public Mono<Climate> getWeatherByCity(String city); 
+	
+	public String getHello();
 
 }

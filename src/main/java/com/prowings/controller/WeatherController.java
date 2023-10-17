@@ -2,6 +2,7 @@ package com.prowings.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +26,23 @@ public class WeatherController {
 	@GetMapping("/test")
 	public String hello()
 	{
-		return "welcome to weather forcasting api!!";
+		return "welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!welcome to weather forcasting api!!";
+	}
+
+	@GetMapping("/weathers/{city}")
+	public Mono<Climate> getWeatherByCity(@PathVariable String city)
+	{
+		log.info("Request received to get weather of {} city",city);
+		return weatherService.getWeatherByCity(city);
+		
+	}
+
+	@GetMapping("/weathers/hello")
+	public String getWeatherHello()
+	{
+		log.info("Request received to get weather Hello");
+		return weatherService.getHello();
+		
 	}
 	
 	@PostMapping("/weathers")
